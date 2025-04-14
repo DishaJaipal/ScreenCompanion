@@ -1,0 +1,8 @@
+{
+  "name": "screenpipe-js-sdk",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node queryScreenpipe.js"
+  }
+}
