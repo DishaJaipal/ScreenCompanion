@@ -20,23 +20,39 @@ It serves teams or individuals who need live screen monitoring, text extraction,
 We enhance the extracted text using Groq's ultra-fast LLM inference for real-time insights and pattern detection, enabling instant feedback or action suggestions based on screen activity.
 ---
 
+
+
 ## 🧠 Team & Approach
 
 ### Team Name:  
-
+`Your team name here`
 
 ### Team Members:  
-- Name 1 (GitHub / LinkedIn / Role)  
-- Name 2  
-- Name 3  
-*(Add links if you want)*
+- Disha Jaipal (GitHub- https://github.com/DishaJaipal / LinkedIn- www.linkedin.com/in/disha-jaipal-25318a247 / Role- Sysytem SetUP & GROQ AI / Responsibilities- System Setup & Tooling,Groq API Integration,Fluvio Integration (Collaborated) )  
+- Prakruti U  (GitHub- https://github.com/PRAKRUTHI77 / LinkedIn- www.linkedin.com/in/prakruthi-u-180463296 /Role- OCR & Streaming /Responsibilities- OCR Integration ,Fluvio Integration (Collaborated))
+- Sindhushree N H (GitHub- https://github.com/SindhushreeNH / LinkedIn- www.linkedin.com/in/sindhushree-nh-38a748332 / Role- UI & Automation / Responsibilities- Integrated ScreenPipe Terminator for UI control,Built GUI )
+- D M Shreya (GitHub- https://github.com/dmshreya / LinkedIn- https://www.linkedin.com/in/shreya-dm-a749432a6 / Role- Docs & git  / Responsibilities- Wrote and structured project documentation,Edited demo video for presentation,Managed GitHub repo setup )
+
 
 ### Your Approach:  
-- Chose this problem to explore real-time text processing + intelligent stream analysis, using powerful tools like OpenCV, Pytesseract, Fluvio, and Groq.
+- Why we chose this problem :
+  We wanted to build something that actually makes our daily lives better—especially with how easy it is to get distracted or overwhelmed when you're working on a laptop all day. So, we came up with this idea   
+ of a smart screen productivity assistant that can understand what the user is doing and give helpful, real-time suggestions to stay on track. We wanted it to feel lightweight, run locally, and still be smart— 
+ so no bloated apps. Optional cloud features were a bonus for personalization later.
+  
+- Key challenges we addressed :
+  Screen Understanding Without SDK Access: Since the ScreenPipe SDK wasn’t publicly available, we creatively used Terminator (UI automation) and OCR tools to simulate contextual screen awareness.
+  Real-time Data Handling: We used Fluvio to stream OCR output in real-time, ensuring fast task detection without lag.
+  AI Suggestions: We integrated the Groq API to generate accurate, relevant suggestions (like recommending music, activating focus mode, or drafting emails).
+  Desktop-Friendly UX: We ensured the assistant works as a tray app, is lightweight, and doesn’t interrupt the user.
+  Collaborative Development: We balanced 4 contributors working on different but interconnected parts.
 
-- Key challenges included OCR optimization, efficient real-time streaming, and seamless LLM integration with minimal latency.
-
-- Breakthroughs included successful low-latency streaming and integrating Groq for rapid LLM inference on extracted text.
+- Any pivots, brainstorms, or breakthroughs during hacking  :
+  🧠 Initially, we planned on screen recording + content classification, but pivoted to UI automation + OCR due to SDK access limits.
+  🔁 We creatively reused Fluvio for non-standard use cases, like streaming OCR data in real-time.
+  🧩 We brainstormed how to structure recommendations using Groq and simple logic from OCR context.
+  🎯 Combining screen structure via Terminator + text context via OCR gave us a powerful foundation for screen awareness.
+  🛠️ We integrated components like Groq, OCR, and the GUI into a modular system that can be improved later with the actual ScreenPipe SDK or ML models.
 
 
 
@@ -45,44 +61,32 @@ We enhance the extracted text using Groq's ultra-fast LLM inference for real-tim
 ## 🛠️ Tech Stack
 
 ### Core Technologies Used:
-- Frontend: React (for consumer visualization)
+Frontend: Python (Tkinter or PyQt for the GUI)
+Backend: Python (for OCR and task detection), Groq (for AI-driven suggestions)
+Database: Firebase (optional for cloud activity logging)
+APIs: Groq API (for task analysis and suggestions)
+Hosting: Local environment (desktop application, tray app)
 
-- Backend: Python (for frame processing, Fluvio producer, and Groq integration)
-
-- Database: N/A
-
-- APIs: Pytesseract, OpenCV, Groq Cloud API
-
-- Hosting: GitHub 
-
-### Sponsor Technologies Used :
-- [✅] **Groq:** Used to process extracted screen text with high-speed LLM inference for smart insights.
-- [ ] **Monad:**   
-- [✅] **Fluvio:** Used for streaming extracted text data from screen in real-time.  
-- [ ] **Base:** 
-- [✅] **Screenpipe:** Used for efficient screen capturing and frame handling.
-- [ ] **Stellar:** 
-
----
+### Sponsor Technologies Used (if any):
+✅ Groq: Used to generate accurate, context-aware suggestions such as focus mode activation, music recommendations, or email drafting.
+[ ] Monad: Your blockchain implementation
+✅ Fluvio: Used for real-time data handling, streaming OCR output to ensure fast task detection and response. Running via Docker for integration.
+[ ] Base: AgentKit / OnchainKit / Smart Wallet usage
+✅ Screenpipe: Used Terminator repo for UI automation and task detection, simulating screen awareness.
+[ ] Stellar: Payments, identity, or token usage
 
 ## ✨ Key Features
 
 Highlight the most important features of your project:
-
-- ✅ Real-time screen capture using ScreenPipe
-
-- ✅ Text extraction via OCR (Pytesseract)
-
-- ✅ Real-time data streaming using Fluvio
-
-- ✅ Groq-powered LLM analysis on extracted text
-
-
-
+- ✅ Real-time task detection: Using OCR (pytesseract + OpenCV) to capture and analyze screen content instantly.
+- ✅ AI-driven suggestions: Powered by the Groq API to provide intelligent recommendations like focus mode activation and background music suggestions.
+- ✅ UI automation: Using ScreenPipe’s Terminator for automating UI interactions based on detected tasks.
+- ✅ Lightweight desktop assistant: Tray app that runs silently in the background, offering productivity-enhancing features without disrupting the user.
 
 Add images, GIFs, or screenshots if helpful!
 
 ---
+
 
 ## 📽️ Demo & Deliverables
 
