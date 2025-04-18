@@ -66,7 +66,7 @@ Highlight the most important features of your project:
 - ✅ Feature 1  
 - ✅ Feature 2  
 - ✅ Feature 3  
-- ✅ Feature 4  
+- ✅ Feature 4 
 
 Add images, GIFs, or screenshots if helpful!
 
