@@ -1,6 +1,6 @@
 ![github-submission-banner](https://github.com/user-attachments/assets/a1493b84-e4e2-456e-a791-ce35ee2bcf2f)
 
-# 🚀 Project Title
+# 🚀 ScreenCompanion
 
 > A one-line tagline or mission statement for your project.
 Screen Companion using groq and Screenpipe 
@@ -9,6 +9,9 @@ Screen Companion using groq and Screenpipe
 ## 📌 Problem Statement
  
 ****
+In today’s world, staying productive is harder than ever with constant distractions, multitasking, and mental fatigue. Traditional tools don't offer the personalized, real-time help people need to stay focused.
+
+We’re building a smart screen productivity assistant that uses OCR to understand what the user is doing and provides real-time suggestions to stay focused. These could include things like music recommendations, focus mode activation, or help with writing emails. The app runs locally, is lightweight, and works silently in the background as a desktop tray app, making it easy to stay on track without distractions.
 
 ---
 
@@ -25,7 +28,7 @@ We enhance the extracted text using Groq's ultra-fast LLM inference for real-tim
 ## 🧠 Team & Approach
 
 ### Team Name:  
-`Your team name here`
+DONBONDUS
 
 ### Team Members:  
 - Disha Jaipal (GitHub- https://github.com/DishaJaipal / LinkedIn- www.linkedin.com/in/disha-jaipal-25318a247 / Role- Sysytem SetUP & GROQ AI / Responsibilities- System Setup & Tooling,Groq API Integration,Fluvio Integration (Collaborated) )  
