@@ -3,29 +3,27 @@
 # 🚀 Project Title
 
 > A one-line tagline or mission statement for your project.
-
+Screen Companion using groq and Screenpipe 
 ---
 
 ## 📌 Problem Statement
-
-Select the problem statement number and title from the official list given in Participant Manual.
-
-**Example:**  
-**Problem Statement 7 – Transform the Future of Rural Commerce**
+ 
+****
 
 ---
 
 ## 🎯 Objective
 
-What problem does your project solve, and who does it serve?  
-Briefly describe the real-world use case and the value it provides.
+Our project captures screen content in real-time, extracts meaningful text using OCR (Optical Character Recognition), and streams the data using Fluvio for downstream processing.
+It serves teams or individuals who need live screen monitoring, text extraction, or real-time analytics from screen activities — helpful for accessibility, productivity tools, or automating workflows.
 
+We enhance the extracted text using Groq's ultra-fast LLM inference for real-time insights and pattern detection, enabling instant feedback or action suggestions based on screen activity.
 ---
 
 ## 🧠 Team & Approach
 
 ### Team Name:  
-`Your team name here`
+
 
 ### Team Members:  
 - Name 1 (GitHub / LinkedIn / Role)  
@@ -34,39 +32,53 @@ Briefly describe the real-world use case and the value it provides.
 *(Add links if you want)*
 
 ### Your Approach:  
-- Why you chose this problem  
-- Key challenges you addressed  
-- Any pivots, brainstorms, or breakthroughs during hacking  
+- Chose this problem to explore real-time text processing + intelligent stream analysis, using powerful tools like OpenCV, Pytesseract, Fluvio, and Groq.
+
+- Key challenges included OCR optimization, efficient real-time streaming, and seamless LLM integration with minimal latency.
+
+- Breakthroughs included successful low-latency streaming and integrating Groq for rapid LLM inference on extracted text.
+
+
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Core Technologies Used:
-- Frontend:
-- Backend:
-- Database:
-- APIs:
-- Hosting:
+- Frontend: React (for consumer visualization)
 
-### Sponsor Technologies Used (if any):
-- [ ] **Groq:** _How you used Groq_  
-- [ ] **Monad:** _Your blockchain implementation_  
-- [ ] **Fluvio:** _Real-time data handling_  
-- [ ] **Base:** _AgentKit / OnchainKit / Smart Wallet usage_  
-- [ ] **Screenpipe:** _Screen-based analytics or workflows_  
-- [ ] **Stellar:** _Payments, identity, or token usage_
-*(Mark with ✅ if completed)*
+- Backend: Python (for frame processing, Fluvio producer, and Groq integration)
+
+- Database: N/A
+
+- APIs: Pytesseract, OpenCV, Groq Cloud API
+
+- Hosting: GitHub 
+
+### Sponsor Technologies Used :
+- [✅] **Groq:** Used to process extracted screen text with high-speed LLM inference for smart insights.
+- [ ] **Monad:**   
+- [✅] **Fluvio:** Used for streaming extracted text data from screen in real-time.  
+- [ ] **Base:** 
+- [✅] **Screenpipe:** Used for efficient screen capturing and frame handling.
+- [ ] **Stellar:** 
+
 ---
 
 ## ✨ Key Features
 
 Highlight the most important features of your project:
 
-- ✅ Feature 1  
-- ✅ Feature 2  
-- ✅ Feature 3  
-- ✅ Feature 4 
+- ✅ Real-time screen capture using ScreenPipe
+
+- ✅ Text extraction via OCR (Pytesseract)
+
+- ✅ Real-time data streaming using Fluvio
+
+- ✅ Groq-powered LLM analysis on extracted text
+
+
+
 
 Add images, GIFs, or screenshots if helpful!
 
@@ -81,32 +93,46 @@ Add images, GIFs, or screenshots if helpful!
 
 ## ✅ Tasks & Bonus Checklist
 
-- [ ] **All members of the team completed the mandatory task - Followed at least 2 of our social channels and filled the form** (Details in Participant Manual)  
-- [ ] **All members of the team completed Bonus Task 1 - Sharing of Badges and filled the form (2 points)**  (Details in Participant Manual)
-- [ ] **All members of the team completed Bonus Task 2 - Signing up for Sprint.dev and filled the form (3 points)**  (Details in Participant Manual)
-
-*(Mark with ✅ if completed)*
+- [✅] **All members of the team completed the mandatory task - Followed at least 2 of our social channels and filled the form** (Details in Participant Manual)  
+- [✅] **All members of the team completed Bonus Task 1 - Sharing of Badges and filled the form (2 points)**  (Details in Participant Manual)
+- [✅] **All members of the team completed Bonus Task 2 - Signing up for Sprint.dev and filled the form (3 points)**  (Details in Participant Manual)
 
 ---
 
 ## 🧪 How to Run the Project
 
 ### Requirements:
-- Node.js / Python / Docker / etc.
-- API Keys (if any)
-- .env file setup (if needed)
+
+- Python 3.10+
+
+- Fluvio CLI installed
+
+- Tesseract OCR
+
+- Groq API Key
+
+- ScreenPipe installed
+
+- .env file with keys and topic names
 
 ### Local Setup:
 ```bash
 # Clone the repo
 git clone https://github.com/your-team/project-name
 
-# Install dependencies
-cd project-name
-npm install
+# Install backend dependencies
+cd backend
+pip install -r requirements.txt
 
-# Start development server
-npm run dev
+# Add your Groq API Key to .env file
+echo "GROQ_API_KEY=your_api_key_here" > .env
+
+# Start screen capture and streaming
+python main.py
+
+# In a separate terminal, consume data:
+fluvio consume screen-data
+
 ```
 
 Provide any backend/frontend split or environment setup notes here.
@@ -125,14 +151,21 @@ List improvements, extensions, or follow-up features:
 
 ## 📎 Resources / Credits
 
-- APIs or datasets used  
-- Open source libraries or tools referenced  
-- Acknowledgements  
+- Groq – Ultra-low-latency LLM inference
 
+- ScreenPipe
+
+- Fluvio
+
+- Pytesseract
+
+- OpenCV
+
+- Huge thanks to mentors and hackathon organizers!
 ---
 
 ## 🏁 Final Words
 
-Share your hackathon journey — challenges, learnings, fun moments, or shout-outs!
+This hackathon taught us how powerful real-time data, intelligent processing, and fast inference can be when combined. Groq's performance amazed us, and the overall system worked smoothly even under high frame loads. Excited to keep building
 
 ---
