@@ -9,7 +9,12 @@ import random
 from PIL import Image, ImageTk
 import os
 
-# === Load Mascot Animations ===
+import json
+
+# === Load USER INFO from config file ===
+with open("user_config.json") as f:
+    user_info = json.load(f)
+
 mascot_animations = {
     "wave": ["mascot/wave1.png", "mascot/wave2.png", "mascot/wave3.png"],
     "nod": ["mascot/nod1.png", "mascot/nod2.png", "mascot/nod3.png"],
