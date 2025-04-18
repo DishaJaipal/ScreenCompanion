@@ -69,13 +69,13 @@ Database: Firebase (optional for cloud activity logging)
 APIs: Groq API (for task analysis and suggestions)
 Hosting: Local environment (desktop application, tray app)
 
-### Sponsor Technologies Used (if any):
-✅ Groq: Used to generate accurate, context-aware suggestions such as focus mode activation, music recommendations, or email drafting.
-[ ] Monad: Your blockchain implementation
-✅ Fluvio: Used for real-time data handling, streaming OCR output to ensure fast task detection and response. Running via Docker for integration.
-[ ] Base: AgentKit / OnchainKit / Smart Wallet usage
-✅ Screenpipe: Used Terminator repo for UI automation and task detection, simulating screen awareness.
-[ ] Stellar: Payments, identity, or token usage
+### Sponsor Technologies Used :
+-✅ Groq: Used to generate accurate, context-aware suggestions such as focus mode activation, music recommendations, or email drafting.
+-[ ] Monad: Your blockchain implementation
+-✅ Fluvio: Used for real-time data handling, streaming OCR output to ensure fast task detection and response. Running via Docker for integration.
+-[ ] Base: AgentKit / OnchainKit / Smart Wallet usage
+-✅ Screenpipe: Used Terminator repo for UI automation and task detection, simulating screen awareness.
+-[ ] Stellar: Payments, identity, or token usage
 
 ## ✨ Key Features
 
