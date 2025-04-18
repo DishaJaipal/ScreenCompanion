@@ -2,8 +2,7 @@
 
 # 🚀 ScreenCompanion
 
-> A one-line tagline or mission statement for your project.
-Screen Companion using groq and Screenpipe 
+> Boosting productivity with real-time, context-aware suggestions to keep you focused and efficient.
 ---
 
 ## 📌 Problem Statement
@@ -37,7 +36,7 @@ DONBONDUS
 - D M Shreya (GitHub- https://github.com/dmshreya / LinkedIn- https://www.linkedin.com/in/shreya-dm-a749432a6 / Role- Docs & git  / Responsibilities- Wrote and structured project documentation,Edited demo video for presentation,Managed GitHub repo setup )
 
 
-### Your Approach:  
+### Our Approach:  
 - Why we chose this problem :
   We wanted to build something that actually makes our daily lives better—especially with how easy it is to get distracted or overwhelmed when you're working on a laptop all day. So, we came up with this idea   
  of a smart screen productivity assistant that can understand what the user is doing and give helpful, real-time suggestions to stay on track. We wanted it to feel lightweight, run locally, and still be smart— 
