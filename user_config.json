@@ -1,6 +1,4 @@
 {
-    "role": "Student",
-    "focus": "Machine Learning"
-  }
-with open("user_config.json") as f:
-    user_info = json.load(f)
+  "role": "Student",
+  "focus": "Complete AI assignment"
+}

@@ -1,20 +1,21 @@
 import tkinter as tk
-from firebase_logger import log_to_firebase
-from trigger_tray_popup import trigger_tray_popup
-from shared_config import user_info
-
 from tkinter import messagebox
 import speech_recognition as sr
-import random
 from PIL import Image, ImageTk
+import random
 import os
-
 import json
+from chatbot import get_response_from_groq
+from firebase_logger import log_to_firebase
+from trigger_tray_popup import trigger_tray_popup
+from productivity_logger import log_productivity
+from app_controller.logic import launch_app_for_task
 
-# === Load USER INFO from config file ===
+# === Load User Config ===
 with open("user_config.json") as f:
     user_info = json.load(f)
 
+# === Load Mascot Animations ===
 mascot_animations = {
     "wave": ["mascot/wave1.png", "mascot/wave2.png", "mascot/wave3.png"],
     "nod": ["mascot/nod1.png", "mascot/nod2.png", "mascot/nod3.png"],
@@ -23,17 +24,17 @@ mascot_animations = {
 
 # === Main GUI Window ===
 root = tk.Tk()
-root.title("IntelliBot")
-root.geometry("720x800")
+root.title("ScreenAssistant IntelliBot")
+root.geometry("800x850")
 root.config(bg="#e0f7fa")
 
+# === Mascot Area ===
 mascot_label = tk.Label(root, bg="#e0f7fa")
-mascot_label.pack(pady=5)
+mascot_label.pack(pady=10)
 
 def play_mascot_animation():
     action = random.choice(list(mascot_animations.keys()))
-    frames = mascot_animations[action]
-    for frame_path in frames:
+    for frame_path in mascot_animations[action]:
         img = Image.open(frame_path).resize((160, 160))
         photo = ImageTk.PhotoImage(img)
         mascot_label.config(image=photo)
@@ -51,13 +52,9 @@ chat_log.config(state=tk.DISABLED)
 
 def display_message(sender, message):
     chat_log.config(state=tk.NORMAL)
-    chat_log.insert(tk.END, f"\n{sender}: {message}\n")
+    chat_log.insert(tk.END, f"{sender}: {message}\n")
     chat_log.see(tk.END)
     chat_log.config(state=tk.DISABLED)
-
-def dummy_response(msg):
-    # Dummy logic, replace with real model integration
-    return f"I'm thinking about: {msg}!"
 
 # === Input Section ===
 entry_frame = tk.Frame(root, bg="#e0f7fa")
@@ -66,6 +63,7 @@ entry_frame.pack(pady=10)
 entry = tk.Entry(entry_frame, width=60, font=("Arial", 12))
 entry.pack(side=tk.LEFT, padx=10)
 
+# === Core Interaction Functions ===
 def send_message(msg=None):
     user_input = entry.get() if msg is None else msg
     if not user_input.strip():
@@ -73,61 +71,53 @@ def send_message(msg=None):
     entry.delete(0, tk.END)
     display_message("You", user_input)
 
-    response = dummy_response(user_input)
-    display_message("Bot", response)
-
-    log_to_firebase(user_input, response) 
-    play_mascot_animation()
-
-    if user_info["focus"] and user_info["focus"].lower() not in user_input.lower():
+    # Check focus mismatch
+    if user_info["focus"].lower() not in user_input.lower():
         trigger_tray_popup()
 
+    # Get Groq response
+    response = get_response_from_groq(user_input)
+    display_message("Bot", response)
+
+    # Log to Firebase and local
+    log_to_firebase(user_input, response)
+    log_productivity(user_input)
+
+    # Trigger mascot
+    play_mascot_animation()
+
+    # Check if task requires launching app
+    if "open" in user_input.lower() or "start" in user_input.lower():
+        keywords = ["note", "calculator", "browse", "doc"]
+        for word in keywords:
+            if word in user_input.lower():
+                result = launch_app_for_task(f"write_{word}" if word != "calculator" else "calculate")
+                display_message("System", result)
+
 def listen_to_audio():
-    r = sr.Recognizer()
+    recognizer = sr.Recognizer()
     with sr.Microphone() as source:
-        print("Listening...")
-        audio = r.listen(source)
+        display_message("System", "🎙️ Listening...")
+        audio = recognizer.listen(source)
     try:
-        return r.recognize_google(audio)
+        return recognizer.recognize_google(audio)
     except sr.UnknownValueError:
         return "Sorry, I didn't catch that."
 
 def voice_message():
     user_input = listen_to_audio()
-    display_message("You (via Mic)", user_input)
-    response = dummy_response(user_input)
+    display_message("You (via mic)", user_input)
+    response = get_response_from_groq(user_input)
     display_message("Bot", response)
     log_to_firebase(user_input, response)
+    log_productivity(user_input)
     play_mascot_animation()
 
-    if user_info["focus"] and user_info["focus"].lower() not in user_input.lower():
-        trigger_tray_popup()
-
+# === Buttons ===
 tk.Button(entry_frame, text="Send", font=("Arial", 12), command=send_message).pack(side=tk.LEFT)
 tk.Button(entry_frame, text="🎙️ Speak", font=("Arial", 12), command=voice_message).pack(side=tk.LEFT, padx=5)
 
-# === Ask Role/Focus Modal ===
-def ask_user_info():
-    def submit():
-        user_info["role"] = role_var.get()
-        user_info["focus"] = focus_entry.get()
-        display_message("System", f"Hello {user_info['role']}! Today's focus: {user_info['focus']}")
-        info_win.destroy()
+# === Start Message ===
+display_message("System", f"Welcome {user_info['role']}! Your focus today is '{user_info['focus']}'.")
 
-    info_win = tk.Toplevel(root)
-    info_win.title("Welcome to IntelliBot")
-    info_win.geometry("400x250")
-    info_win.grab_set()
-
-    tk.Label(info_win, text="Select your role:", font=("Arial", 12)).pack(pady=5)
-    role_var = tk.StringVar(value="Student")
-    tk.OptionMenu(info_win, role_var, "Student", "Developer", "Researcher", "Other").pack()
-
-    tk.Label(info_win, text="What's your main focus today?", font=("Arial", 12)).pack(pady=10)
-    focus_entry = tk.Entry(info_win, width=40)
-    focus_entry.pack(pady=5)
-
-    tk.Button(info_win, text="Start Chatting", font=("Arial", 12), command=submit).pack(pady=15)
-
-ask_user_info()
 root.mainloop()

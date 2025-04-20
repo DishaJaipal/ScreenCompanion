@@ -1,6 +1,4 @@
-APPS = {
-    "notepad": "notepad.exe",
-    "calculator": "calc.exe",
-    "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-    "wordpad": "write.exe"
-}
+import json
+
+with open("user_config.json") as f:
+    user_info = json.load(f)
