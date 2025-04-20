@@ -3,7 +3,7 @@ from tkinter import messagebox
 import speech_recognition as sr
 from PIL import Image, ImageTk
 import random
-import os
+import os 
 import json
 from chatbot import get_response_from_groq
 from firebase_logger import log_to_firebase
@@ -121,3 +121,4 @@ tk.Button(entry_frame, text="🎙️ Speak", font=("Arial", 12), command=voice_m
 display_message("System", f"Welcome {user_info['role']}! Your focus today is '{user_info['focus']}'.")
 
 root.mainloop()
+

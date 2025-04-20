@@ -10,3 +10,6 @@ def log_to_firebase(user_input, response):
         "user_input": user_input,
         "response": response
     })
+
+
+    
