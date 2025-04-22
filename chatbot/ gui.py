@@ -1,4 +1,4 @@
-import tkinter as tk
+import tkinter as tk as tf
 from tkinter import messagebox
 import speech_recognition as sr
 from PIL import Image, ImageTk
