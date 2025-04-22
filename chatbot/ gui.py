@@ -1,4 +1,4 @@
-import tkinter as tk as tf
+import tkinter as tk
 from tkinter import messagebox
 import speech_recognition as sr
 from PIL import Image, ImageTk
@@ -10,10 +10,15 @@ from firebase_logger import log_to_firebase
 from trigger_tray_popup import trigger_tray_popup
 from productivity_logger import log_productivity
 from app_controller.logic import launch_app_for_task
+from pathlib import Path
+import sys
+sys.path.append(str(Path(__file__).parent))  # Add project root to Python path
+                      # Relative import
+# === Load User Config === open("user_config.json") as f:
 
-# === Load User Config ===
+# Correct way to open and load a JSON file
 with open("user_config.json") as f:
-    user_info = json.load(f)
+    user_info = json.load(f)  # Proper indentation inside the with block
 
 # === Load Mascot Animations ===
 mascot_animations = {
@@ -31,7 +36,14 @@ root.config(bg="#e0f7fa")
 # === Mascot Area ===
 mascot_label = tk.Label(root, bg="#e0f7fa")
 mascot_label.pack(pady=10)
-
+def get_response_from_groq(user_input):
+    # Simple dummy responses
+    responses = [
+        "I'm a simple chatbot!",
+        "Nice to meet you!",
+        "What would you like to discuss?"
+    ]
+    return random.choice(responses)
 def play_mascot_animation():
     action = random.choice(list(mascot_animations.keys()))
     for frame_path in mascot_animations[action]:
@@ -118,6 +130,13 @@ tk.Button(entry_frame, text="Send", font=("Arial", 12), command=send_message).pa
 tk.Button(entry_frame, text="🎙️ Speak", font=("Arial", 12), command=voice_message).pack(side=tk.LEFT, padx=5)
 
 # === Start Message ===
-display_message("System", f"Welcome {user_info['role']}! Your focus today is '{user_info['focus']}'.")
+# Safe way to access dictionary keys
+welcome_message = "Welcome!"
+if 'role' in user_info:
+    welcome_message += f" {user_info['role']}!"
+if 'focus' in user_info:
+    welcome_message += f" Your focus today is '{user_info['focus']}'."
 
+display_message("System", welcome_message)
 root.mainloop()
+
