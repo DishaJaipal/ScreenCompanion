@@ -1,100 +1,49 @@
 import requests
 import json
 import os
-from main import client
-import groq
+from groq import Groq
 import time
-from Screendata.screen_capture import capture_screen
-from Screendata.extracting import process_screenshot
-# from main import user_role, user_goal  
+from screen_capture import capture_screen
+from extracting import process_screenshot
+from dotenv import load_dotenv
 
-# CAPTURE_INTERVAL = 300  
+load_dotenv()
+client=Groq(api_key = os.getenv("GROQ_API_KEY"))
 
-# def run_screen_assistant():
-#     """Periodically capture and process screenshots, and integrate with Groq."""
-#     previous_gray = None  # Store the previous grayscale screenshot for SSIM comparison
+def generate_suggestion(role, goal, text, window):
+    completion = client.chat.completions.create(
+        model="gemma2-9b-it",
+        messages=[
+            {
+                 "role": "system",
+                 "content": f"You are ScreenCompanion, a friendly desktop productivity AI assistant. Based on the user’s screen content (text extracted using OCR), and their current role and goal, your job is to give clear, focused suggestions that improve their productivity. Your role is to help users stay focused and aligned with their goal.\n\nYou are provided:\n- The user's role (e.g., student, developer).\n- The user's goal (e.g., finish a math assignment).\n- OCR-extracted text from the current screen.\n- The title or name of the currently active window.\n\nYour tasks:\n- Give short, actionable suggestions to improve productivity.\n- Gently alert if the user seems distracted or off-task.\n- Suggest system or behavior changes to align better with their goal.\n- Recommend helpful system-level actions such as \"close distracting window,\" \"open notes app,\" \"switch to VS Code\" etc., if screen content shows misalignment with the goal. Make these suggestions **explicit and actionable** so they can be automated using ScreenPipe Terminator.\n- Encourage breaks if the screen shows signs of fatigue, boredom, or prolonged inactivity.\n- NEVER assume anything beyond what is in the OCR or window title.\n\nSpeak like a helpful accountability buddy: Keep responses concise, actionable, motivating, positive, and supportive. Avoid long text. Never use technical jargon unless the user is a developer or engineer.\n\nTone: Friendly, concise, and motivating. Prioritize goal alignment and smart habits. Do not hallucinate or make up apps or tasks not present in the screen data.\n"
+            },
+            {
+                "role": "user",
+                "content": f"USER ROLE: {role}\nUSER GOAL: {goal}\nSCREEN CONTENT (OCR): {text} \nCURRENT ACTIVE WINDOW: {window}\n\nBased on the above ,Give helpful, short suggestions and note if I'm distracted. Be friendly and clear.Based on the screen activity above these instructions as to what to do :\n1.tell me if I’m on track with my goal.\n2.If I seem off-task or distracted, gently alert me and suggest what I can change to stay on track.\n3.Suggest short, actionable ways I can improve my productivity right now.\n4.If possible, recommend system-level actions (e.g., close a distracting app, open something relevant to the goal) that can be passed to an automation tool.\n5.Encourage breaks only if it makes sense from the context.\n6.Keep your tone like a kind productivity buddy—short, friendly, helpful.\n7.Do NOT guess what I might be doing if it isn’t present in the screen data but if screen data is absent you need to check with me if it on track with my goal to make sure I'm not wasting time.\n8.DO NOT fabricate tasks, websites, or applications that are not shown in the text or window name.\n\nGive your response in this format:\n    Productivity Suggestion:\n    Suggested Action (if applicable):\n\n"
+            },
+            {
+                "role": "assistant",
+                "content": "Okay, I'm ready to be your productivity buddy!  Just tell me your role, goal, and what's on your screen, and I'll do my best to help you stay focused and make progress.  \n"
+            }
+             ],
+             temperature=1,
+             max_completion_tokens=1024,
+             top_p=1,
+             stream=True,
+             stop=None,
+         )
+    response=""
+    for chunk in completion:
+        response += chunk.choices[0].delta.content or ""
 
-#     while True:
-#         try:
-#             # Step 1: Capture the current screen
-#             screenshot = capture_screen()
+    return response.strip()
+text1="def add(a, b): return a + b\n\nprint(add(5, 3))"
 
-#             # Step 2: Process the screenshot and extract meaningful text
-#             result, previous_gray = process_screenshot(screenshot, previous_gray)
-
-#             if result:
-#                 # Extracted data
-#                 extracted_text = result["text"]
-#                 window_title = result["window_title"]
-
-#                 # Step 3: Prepare a prompt for Groq API
-#                 prompt = (
-#                     f"The user is currently working in the window: {window_title}. "
-#                     f"The user's role is 'student' and their goal is 'working on a productiviy app using python'. "
-#                     f"Based on the content:\n\n{extracted_text}\n\n"
-#                     "Provide productivity-enhancing suggestions and alert them if they deviate."
-#                 )
-
-#                 # Step 4: Send the prompt to Groq API
-#                 completion = client.chat.completions.create(
-#                     messages=[
-#                         {"role": "system", "content": "You are a productivity assistant helping users achieve their goals."},
-#                         {"role": "user", "content": prompt}
-#                     ],
-#                     model="deepseek-r1-distill-llama-70b",
-#                     temperature=0.5,
-#                     max_completion_tokens=50,
-#                     top_p=1,
-#                     stop=None,
-#                     reasoning_format="raw"
-#                 )
-#                 for chunk in completion:
-#                     print(chunk.choices[0].delta.content or "", end="")
-
-#                 # # Step 5: Display and handle Groq response
-#                 # response = chat_completion.choices[0].message.content
-#                 # print(f"Groq Response:\n{response}")
-
-#                 speech_file_path = "speech.wav" 
-#                 model = "playai-tts"
-#                 voice = "Fritz-PlayAI"
-#                 text = completion.choices[0].message.content
-#                 response_format = "wav"
-#                 response_v = client.audio.speech.create(
-#                     model=model,
-#                     voice=voice,
-#                     input=text,
-#                     response_format=response_format)
-#                 response_v.write_to_file(speech_file_path)
-#             # Wait for the next interval
-#             print("Full API Response:", response)
-#             time.sleep(CAPTURE_INTERVAL)
-
-#         except KeyboardInterrupt:
-#             print("\nScreenCompanion stopped.")
-#             break
-#         except Exception as e:
-#             print(f"An error occurred: {e}")
-
-screen=capture_screen
-user_role = "student"
-user_goal = "working on a productivity app using python"
-window=screen('window_title')
-extracted_text = process_screenshot(screen, window)
-completion = client.chat.completions.create(
-    model="gemma2-9b-it",
-    messages=[
-        {
-            "role": "system",
-            "content": "You are ScreenCompanion, a friendly desktop productivity AI assistant. Based on the user’s screen content (text extracted using OCR), and their current role and goal, your job is to give clear, focused suggestions that improve their productivity. Your role is to help users stay focused and aligned with their goal.\n\nYou are provided:\n- The user's role (e.g., student, developer).\n- The user's goal (e.g., finish a math assignment).\n- OCR-extracted text from the current screen.\n- The title or name of the currently active window.\n\nYour tasks:\n- Give short, actionable suggestions to improve productivity.\n- Gently alert if the user seems distracted or off-task.\n- Suggest system or behavior changes to align better with their goal.\n- Recommend helpful system-level actions such as \"close distracting window,\" \"open notes app,\" \"switch to VS Code\" etc., if screen content shows misalignment with the goal. Make these suggestions **explicit and actionable** so they can be automated using ScreenPipe Terminator.\n- Encourage breaks if the screen shows signs of fatigue, boredom, or prolonged inactivity.\n- NEVER assume anything beyond what is in the OCR or window title.\n\nSpeak like a helpful accountability buddy: Keep responses concise, actionable, motivating, positive, and supportive. Avoid long text. Never use technical jargon unless the user is a developer or engineer.\n\nTone: Friendly, concise, and motivating. Prioritize goal alignment and smart habits. Do not hallucinate or make up apps or tasks not present in the screen data.\n"
-        }
-    ],
-    temperature=1,
-    max_completion_tokens=1024,
-    top_p=1,
-    stream=True,
-    stop=None,
+ans = generate_suggestion(
+    "student",
+    "studying for my operating system program",
+    text1,
+    "Screenassisstant - Visual Studio Code" 
 )
-
-for chunk in completion:
-    print(chunk.choices[0].delta.content or "", end="")
+print(ans)
