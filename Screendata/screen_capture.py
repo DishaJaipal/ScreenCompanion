@@ -21,16 +21,16 @@ def capture_screen():
         "gray_frame": gray_frame,
         "window_title": get_active_window_title()
     }
-
-# print(result["window_title"])
+#result=capture_screen()
+#print(result["window_title"])
 # Display the captured frame
-# cv2.imshow("Screen Capture", result["frame"])
+#cv2.imshow("Screen Capture", result["frame"])
 
 # Wait for 10 seconds (10,000 milliseconds)
-# cv2.waitKey(10000)
+#cv2.waitKey(10000)
 
 # Close the window
-# cv2.destroyAllWindows()
+#cv2.destroyAllWindows()
 
 # from PIL import Images
 # import numpy as np

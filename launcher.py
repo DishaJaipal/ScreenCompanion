@@ -3,7 +3,7 @@ import subprocess
 import os
 import time
 from datetime import datetime
-from screen_pipe import get_active_window_title, capture_screen
+from screen_capture import get_active_window_title, capture_screen
 from chatbot.chatbot import get_groq_suggestion
 from utils.logger import log_event
 
