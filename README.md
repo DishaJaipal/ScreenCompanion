@@ -54,6 +54,7 @@ DONBONDUS
   🧩 We brainstormed how to structure recommendations using Groq and simple logic from OCR context.
   🎯 Combining screen structure via Terminator + text context via OCR gave us a powerful foundation for screen awareness.
   🛠️ We integrated components like Groq, OCR, and the GUI into a modular system that can be improved later with the actual ScreenPipe SDK or ML models.
+  
   ![image](https://github.com/user-attachments/assets/d507594e-2b30-43bd-9c6e-ad5a7367e948)
 
 
