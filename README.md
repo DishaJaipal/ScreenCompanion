@@ -32,7 +32,7 @@ DONBONDUS
 ### Team Members:  
 - Disha Jaipal (GitHub- https://github.com/DishaJaipal / LinkedIn- www.linkedin.com/in/disha-jaipal-25318a247 / Role- Sysytem SetUP & GROQ AI / Responsibilities- System Setup & Tooling,Groq API Integration,Fluvio Integration (Collaborated) )  
 - Prakruti U  (GitHub- https://github.com/PRAKRUTHI77 / LinkedIn- www.linkedin.com/in/prakruthi-u-180463296 /Role- OCR & Streaming /Responsibilities- OCR Integration ,Fluvio Integration (Collaborated))
-- Sindhushree N H (GitHub- https://github.com/SindhushreeNH / LinkedIn- www.linkedin.com/in/sindhushree-nh-38a748332 / Role- UI & Automation / Responsibilities- Integrated ScreenPipe Terminator for UI control,Built GUI )
+- Sindhushree N H (GitHub- https://github.com/SindhushreeNH / LinkedIn- www.linkedin.com/in/sindhushree-nh-38a748332 / Role- UI & Automation / Responsibilities- Integrated  for UI control,Built GUI )
 - D M Shreya (GitHub- https://github.com/dmshreya / LinkedIn- https://www.linkedin.com/in/shreya-dm-a749432a6 / Role- Docs & git  / Responsibilities- Wrote and structured project documentation,Edited demo video for presentation,Managed GitHub repo setup )
 
 
@@ -44,7 +44,6 @@ DONBONDUS
   
 - Key challenges we addressed :
   Screen Understanding Without SDK Access: Since the ScreenPipe SDK wasn’t publicly available, we creatively used Terminator (UI automation) and OCR tools to simulate contextual screen awareness.
-  Real-time Data Handling: We used Fluvio to stream OCR output in real-time, ensuring fast task detection without lag.
   AI Suggestions: We integrated the Groq API to generate accurate, relevant suggestions (like recommending music, activating focus mode, or drafting emails).
   Desktop-Friendly UX: We ensured the assistant works as a tray app, is lightweight, and doesn’t interrupt the user.
   Collaborative Development: We balanced 4 contributors working on different but interconnected parts.
@@ -55,6 +54,9 @@ DONBONDUS
   🧩 We brainstormed how to structure recommendations using Groq and simple logic from OCR context.
   🎯 Combining screen structure via Terminator + text context via OCR gave us a powerful foundation for screen awareness.
   🛠️ We integrated components like Groq, OCR, and the GUI into a modular system that can be improved later with the actual ScreenPipe SDK or ML models.
+  
+  ![image](https://github.com/user-attachments/assets/d507594e-2b30-43bd-9c6e-ad5a7367e948)
+
 
 
 
@@ -78,7 +80,7 @@ Hosting: Local environment (desktop application, tray app)
 
 [ ] Base: AgentKit / OnchainKit / Smart Wallet usage
 
-✅ Screenpipe: Used Terminator repo for UI automation and task detection, simulating screen awareness.
+[ ] Screenpipe: Used Terminator repo for UI automation and task detection, simulating screen awareness.
 
 [ ] Stellar: Payments, identity, or token usage
 
@@ -122,9 +124,7 @@ Add images, GIFs, or screenshots if helpful!
 
 - Groq API Key
 
-- ScreenPipe installed
-
-- .env file with keys and topic names
+- .env file with keys
 
 ### Local Setup:
 ```bash
@@ -164,15 +164,10 @@ List improvements, extensions, or follow-up features:
 
 - Groq – Ultra-low-latency LLM inference
 
-- ScreenPipe
-
-- Fluvio
-
 - Pytesseract
 
 - OpenCV
 
-- Huge thanks to mentors and hackathon organizers!
 ---
 
 ## 🏁 Final Words
