@@ -1,3 +1,4 @@
+# launcher.py
 import threading
 from tray_app import run_tray
 

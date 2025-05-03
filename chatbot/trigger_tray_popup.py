@@ -1,18 +1,6 @@
-<<<<<<< HEAD
-from plyer import notification
-
-def show_alert(title, message):
-    notification.notify(
-        title=title,
-        message=message,
-        app_name="ScreenAssistant",
-        timeout=5
-    )
-
-
-
-
-=======
+import threading
+import tkinter as tk
+from tkinter import messagebox
 
 def trigger_tray_popup():
     """Show a popup notification when user gets distracted"""
@@ -32,4 +20,3 @@ def trigger_tray_popup():
     
     # Run in a separate thread to avoid blocking
     threading.Thread(target=show_popup, daemon=True).start()
->>>>>>> 86744fa57c56d37e6c25bbf0d94906edc8deb6e5
