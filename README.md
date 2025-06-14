@@ -30,7 +30,7 @@ We enhance the extracted text using Groq's ultra-fast LLM inference for real-tim
 DONBONDUS
 
 ### Team Members:  
-- Disha Jaipal (GitHub- https://github.com/DishaJaipal / LinkedIn- www.linkedin.com/in/disha-jaipal-25318a247 / Role- Sysytem SetUP & GROQ AI / Responsibilities- System Setup & Tooling,Groq API Integration,Fluvio Integration (Collaborated) )  
+- Disha Jaipal (GitHub- https://github.com/DishaJaipal / LinkedIn- www.linkedin.com/in/disha-jaipal-25318a247 / Role- Sysytem SetUP & GROQ AI / Responsibilities- System Setup & Tooling,Groq API Integration,OCR(collaboration )  
 - Prakruti U  (GitHub- https://github.com/PRAKRUTHI77 / LinkedIn- www.linkedin.com/in/prakruthi-u-180463296 /Role- OCR & Streaming /Responsibilities- OCR Integration ,Fluvio Integration (Collaborated))
 - Sindhushree N H (GitHub- https://github.com/SindhushreeNH / LinkedIn- www.linkedin.com/in/sindhushree-nh-38a748332 / Role- UI & Automation / Responsibilities- Integrated  for UI control,Built GUI )
 - D M Shreya (GitHub- https://github.com/dmshreya / LinkedIn- https://www.linkedin.com/in/shreya-dm-a749432a6 / Role- Docs & git  / Responsibilities- Wrote and structured project documentation,Edited demo video for presentation,Managed GitHub repo setup )
@@ -76,7 +76,7 @@ Hosting: Local environment (desktop application, tray app)
 
 [ ] Monad: Your blockchain implementation
 
-✅ Fluvio: Used for real-time data handling, streaming OCR output to ensure fast task detection and response. Running via Docker for integration.
+[ ] Fluvio: Used for real-time data handling, streaming OCR output to ensure fast task detection and response. Running via Docker for integration.
 
 [ ] Base: AgentKit / OnchainKit / Smart Wallet usage
 
@@ -141,8 +141,6 @@ echo "GROQ_API_KEY=your_api_key_here" > .env
 # Start screen capture and streaming
 python main.py
 
-# In a separate terminal, consume data:
-fluvio consume screen-data
 
 ```
 
